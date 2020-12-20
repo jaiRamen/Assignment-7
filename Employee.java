@@ -1,4 +1,9 @@
+//Jai Breisch WEEK 7 1410
 
+//ShayneDarak contributed to the printEmployee method and overall concise manner of this vs my original code
+
+
+//import the utility to read/write to file
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,6 +11,7 @@ import java.io.BufferedReader;
 
 public class Employee {
 
+	//Here we instantiate the variables we will use for this project
 	int employeeID;
 	String firstName;
 	String lastName;
@@ -19,8 +25,8 @@ public class Employee {
 	int insurance;
 	String hiredate;
 	String phone;
-	
 
+	//In this part, we will use setters and getters to use information from the CSV file
 	public Employee(int employeeID) throws NumberFormatException, IOException {
 		this.employeeID = employeeID;
 		this.getEmployee();
@@ -73,7 +79,8 @@ public class Employee {
 	public String getStatus() {
 		return status;
 	}
-
+//This method makes sure that when someone puts in a single letter as their status
+// it will return a string of words vs just a letter (and it is not case dependent).
 	public void setStatus(String status) {
 		this.status = status;
 
@@ -93,7 +100,7 @@ public class Employee {
 		}
 
 	}
-
+//these methods are new for week 7
 	public int getSupervisor_id() {
 		return supervisor_id;
 	}
@@ -125,7 +132,7 @@ public class Employee {
 	public int getInsurance() {
 		return insurance;
 	}
-
+//this method sets the insurance amount based on salary and visa versa
 	public void setInsurance(int insurance) {
 		this.insurance = insurance;
 
@@ -158,7 +165,7 @@ public class Employee {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
+//This method allows the document to be read by the program
 	public void getEmployee() throws NumberFormatException, IOException {
 		File fileName = new File("src\\EmployeeData.csv");
 		if (fileName.exists()) {
@@ -170,7 +177,8 @@ public class Employee {
 			while ((line = br.readLine()) != null) {
 				String[] employeeRecord = line.split(csvSplitBy);
 				if (Integer.parseInt(employeeRecord[0]) == this.employeeID)
-
+					
+//one the record is read from the file it will populate the instance variables instantiated above.
 				{
 					this.setEmployeeID(Integer.parseInt(employeeRecord[0]));
 					this.setFirstName(employeeRecord[1]);
@@ -194,7 +202,10 @@ public class Employee {
 		}
 
 	}
-
+	
+	//Lastly, in order for the main class to print the records in a nice way, we must reference our
+	//instance variables from the CSV file, compile them into a list that is split by type
+	//and finally print each in a way that is visually pleasing to the end user using horizontal lines and proper spacing.
 	public void printEmployee() {
 
 		System.out.println("Employee ID:\t " + this.employeeID);
@@ -207,20 +218,18 @@ public class Employee {
 		System.out.println("Bonus:\t " + this.bonus);
 		System.out.println("Department:\t " + this.department);
 		System.out.println("Insurance:\t " + this.insurance);
-		
-		System.out.println("Hire date:\t " + this.hiredate.substring(0, 4) + "/" 
-										+ this.hiredate.substring(5, 7) + "/"
-										+ this.hiredate.substring(8, 10));
-		
 
-		System.out.println("Phone:\t(" + this.phone.substring(0, 3) + ")" 
-										+ this.phone.substring(3, 6) + "-"
-										+ this.phone.substring(6, 10));
+		System.out.println("Hire date:\t " + this.hiredate.substring(0, 4) + "/" + this.hiredate.substring(5, 7) + "/"
+				+ this.hiredate.substring(8, 10));
+
+		System.out.println("Phone:\t(" + this.phone.substring(0, 3) + ")" + this.phone.substring(3, 6) + "-"
+				+ this.phone.substring(6, 10));
 
 		horizontalLine(35);
 
 	}
-
+//This horizontal line method separates each employee record read from the other \
+	
 	private static void horizontalLine(int dashes) {
 		for (int i = 1; i <= dashes; i++) {
 			System.out.print(".");
